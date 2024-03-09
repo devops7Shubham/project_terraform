@@ -1,8 +1,19 @@
 provider "aws" {
   region  = "us-east-1"
   profile = "default"
-}
+  access_key = "AKIASGEVHDI5ZR5GHNDC"
+  secret_key = "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"
 
+}
+terraform {
+  backend "s3" {
+    bucket = "shubham-terraform-s3-bucket"
+    key    = "terraform/remote/s3/terraform.tfstate"
+    encrypt        = false
+    region         = "us-east-1"
+    dynamodb_table = "dynamodb-state-locking"
+  }
+}
 module "vpc" {
   source                       = "./vpc"
   #vpc_cidr                     = "10.0.0.0/16"
