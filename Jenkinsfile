@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    environment{
-        AWS_ACCESS_KEY_ID=credentials('aws_credentials')
-        AWS_SECRET_ACCESS_KEY=credentials('aws_credentials')
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('aws_credentials')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_credentials')
     }
-    parameters{
+    parameters {
         booleanParam(defaultValue: false, description: 'Apply Terraform changes', name: 'APPLY')
         booleanParam(defaultValue: false, description: 'Destroy Terraform changes', name: 'DESTROY')
     }
@@ -41,12 +41,19 @@ pipeline {
         stage("Terraform apply or destroy") {
             steps {
                 script {
-                    if(params.APPLY){
+                    if (params.APPLY) {
                         sh 'terraform apply -auto-approve'
-                    }
-                    else if(params.DESTROY){
+                    } else if (params.DESTROY) {
                         sh 'terraform destroy -auto-approve'
                     }
+                }
+            }
+        }
+
+        stage("Trigger devops_project Pipeline") {
+            steps {
+                script {
+                    build job: 'devops_project'
                 }
             }
         }
