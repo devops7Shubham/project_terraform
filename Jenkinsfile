@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     checkout([$class: 'GitSCM',
-                        branches: [[name: '*/main']], 
+                        branches: [[name: '*/techverro']], 
                         extensions: [], 
                         userRemoteConfigs: [[url: 'https://github.com/devops7Shubham/project_terraform.git']]
                     ])
