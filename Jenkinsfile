@@ -50,12 +50,12 @@ pipeline {
             }
         }
 
-        stage("Trigger devops_project Pipeline") {
-            steps {
-                script {
-                    build job: 'devops_project'
-                }
-            }
-        }
+       // stage("Trigger devops_project Pipeline") {
+         //   steps {
+           //     script {
+             //       build job: 'devops_project'
+               // }
+            //}
+        //}
     }
 }
